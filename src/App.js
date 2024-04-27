@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { PostProvider, usePosts } from "./PostContext";
 
 import { faker } from "@faker-js/faker";
@@ -14,6 +14,7 @@ function createRandomPost() {
 function App() {
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   const [isFakeDark, setIsFakeDark] = useState(false);
+
   useEffect(
     function () {
       document.documentElement.classList.toggle("fake-dark-mode");
@@ -81,14 +82,14 @@ function Results() {
   return <p>🚀 {posts.length} atomic posts found</p>;
 }
 
-function Main() {
+const Main = memo(function Main() {
   return (
     <main>
       <FormAddPost />
       <Posts />
     </main>
   );
-}
+});
 
 function Posts() {
   return (
